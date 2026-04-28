@@ -1,0 +1,29 @@
+## Flutter / Dart
+.dart_tool/
+.packages
+.pub/
+build/
+
+## Android / iOS / macOS / Windows / Linux (gerados pelo Flutter)
+**/android/.gradle/
+**/android/local.properties
+**/android/**/key.properties
+**/ios/Flutter/Generated.xcconfig
+**/ios/Flutter/flutter_export_environment.sh
+**/ios/Flutter/Flutter.podspec
+**/ios/Flutter/App.framework
+**/ios/Flutter/Flutter.framework
+**/ios/Flutter/Flutter.podspec
+**/ios/Flutter/.last_build_id
+**/ios/Pods/
+**/ios/.symlinks/
+**/macos/Flutter/GeneratedPluginRegistrant.swift
+**/macos/Flutter/ephemeral/
+**/windows/flutter/ephemeral/
+**/linux/flutter/ephemeral/
+
+## IDE
+.idea/
+.vscode/
+*.iml
+
