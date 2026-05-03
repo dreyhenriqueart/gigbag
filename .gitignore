@@ -22,6 +22,9 @@ build/
 **/windows/flutter/ephemeral/
 **/linux/flutter/ephemeral/
 
+## Firebase
+.firebase/
+
 ## IDE
 .idea/
 .vscode/
