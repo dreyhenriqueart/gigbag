@@ -35,6 +35,16 @@ jobs:
           flutter pub get
           flutter build web --release --base-href="/"
 
+      - name: Verificar secret FIREBASE_SERVICE_ACCOUNT_GIGBAG_APP
+        env:
+          FIREBASE_SA: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_GIGBAG_APP }}
+        run: |
+          if [ -z "${FIREBASE_SA}" ]; then
+            echo "::error::Secret ausente. Em GitHub: Settings → Secrets and variables → Actions → New repository secret."
+            echo "::error::Nome: FIREBASE_SERVICE_ACCOUNT_GIGBAG_APP | Valor: JSON inteiro (Firebase Console → Project settings → Service accounts → Generate new private key)."
+            exit 1
+          fi
+
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v2
         with:
