@@ -1,6 +1,9 @@
 name: Deploy Gigbag Web (GitHub Pages)
 
 on:
+  push:
+    branches:
+      - developer
   workflow_dispatch:
 
 permissions:
