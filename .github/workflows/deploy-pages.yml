@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - developer
+      - main
   workflow_dispatch:
 
 permissions:
@@ -30,15 +31,17 @@ jobs:
       - name: Flutter pub get
         run: flutter pub get
 
-      - name: Build web
+      - name: Build web (base path /gigbag/)
         run: flutter build web --release --base-href="/gigbag/"
 
-      - name: Publish site to docs/ on branch developer
+      - name: Desativa Jekyll (evita ignorar arquivos do Flutter)
+        run: touch build/web/.nojekyll
+
+      - name: Publica só o site na branch gh-pages (raiz)
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: developer
+          publish_branch: gh-pages
           publish_dir: gigbag_app/build/web
-          destination_dir: docs
-          keep_files: true
-          commit_message: "deploy: GitHub Pages → docs/ [skip ci]"
+          force_orphan: true
+          commit_message: "deploy: Pages gigbag [skip ci]"
