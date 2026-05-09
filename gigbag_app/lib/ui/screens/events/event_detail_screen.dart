@@ -39,7 +39,6 @@ class _EventDetailScreenState extends State<EventDetailScreen> {
   bool _saving = false;
 
   static const double _fieldGap = 10;
-  static const double _saveButtonHeight = 56;
   static const double _saveBottomGap = 32;
   static const double _scrollBottomAboveButtons = 16;
   static const double _betweenBriefingAndSave = 16;
@@ -183,7 +182,7 @@ class _EventDetailScreenState extends State<EventDetailScreen> {
   }) {
     return SizedBox(
       width: double.infinity,
-      height: _saveButtonHeight,
+      height: AppLayout.primaryCtaButtonHeight,
       child: FilledButton(
         onPressed: onPressed,
         style: FilledButton.styleFrom(
@@ -225,7 +224,7 @@ class _EventDetailScreenState extends State<EventDetailScreen> {
                   onPressed: () => Navigator.of(context).pop(),
                 ),
                 centerTitle: const Text('Bag'),
-                trailing: const SizedBox(width: 48, height: 48),
+                trailing: const SizedBox(width: 44, height: 44),
               ),
               const Expanded(child: Center(child: Text('Evento não encontrado.'))),
             ],
@@ -256,7 +255,7 @@ class _EventDetailScreenState extends State<EventDetailScreen> {
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
-              trailing: const SizedBox(width: 48, height: 48),
+              trailing: const SizedBox(width: 44, height: 44),
             ),
             const SizedBox(height: AppLayout.screenGap),
             Expanded(
@@ -298,7 +297,7 @@ class _EventDetailScreenState extends State<EventDetailScreen> {
                       Text(
                         'Equipamento',
                         style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                              fontSize: 20,
+                              fontSize: 16,
                               fontWeight: FontWeight.w400,
                               color: AppColors.textSecondary,
                             ),
@@ -366,7 +365,7 @@ class _EventDetailScreenState extends State<EventDetailScreen> {
                     child: const Text(
                       'briefing',
                       style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 16,
                         fontWeight: FontWeight.w400,
                         color: AppColors.textPrimary,
                       ),
@@ -390,7 +389,7 @@ class _EventDetailScreenState extends State<EventDetailScreen> {
                           : const Text(
                               'salvar',
                               style: TextStyle(
-                                fontSize: 20,
+                                fontSize: 16,
                                 fontWeight: FontWeight.w400,
                                 color: AppColors.textPrimary,
                               ),

@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 
 class FixedHeightCard extends StatelessWidget {
-  const FixedHeightCard({super.key, required this.child});
+  const FixedHeightCard({super.key, this.height = 64, required this.child});
+
+  final double height;
 
   final Widget child;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 88,
+      height: height,
       child: Card(
         clipBehavior: Clip.antiAlias,
         child: child,

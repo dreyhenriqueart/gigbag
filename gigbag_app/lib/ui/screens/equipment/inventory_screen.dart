@@ -48,7 +48,7 @@ class InventoryScreen extends StatelessWidget {
                 onPressed: () => Navigator.of(context).pop(),
               ),
               centerTitle: const Text('Equipamento'),
-              trailing: const SizedBox(width: 48, height: 48),
+              trailing: const SizedBox(width: 44, height: 44),
             ),
             const SizedBox(height: AppLayout.screenGap),
             Expanded(

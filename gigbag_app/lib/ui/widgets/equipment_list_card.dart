@@ -4,7 +4,7 @@ import '../../domain/equipment.dart';
 import '../theme/app_colors.dart';
 import 'fixed_height_card.dart';
 
-/// Card de linha de equipamento alinhado à tela Inventário (altura 88, padding, tipografia).
+/// Card de linha de equipamento alinhado à tela Inventário (altura 72, padding, tipografia).
 class EquipmentListCard extends StatelessWidget {
   const EquipmentListCard({
     super.key,
@@ -25,6 +25,7 @@ class EquipmentListCard extends StatelessWidget {
     final hasCategory = category.isNotEmpty;
 
     return FixedHeightCard(
+      height: 64,
       child: InkWell(
         onTap: onTap,
         onLongPress: onLongPress,
@@ -39,7 +40,7 @@ class EquipmentListCard extends StatelessWidget {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
-                    fontSize: 20,
+                    fontSize: 16,
                     fontWeight: FontWeight.w400,
                     color: AppColors.textPrimary,
                   ),

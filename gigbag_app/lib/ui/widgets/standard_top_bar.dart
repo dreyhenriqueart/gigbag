@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../theme/app_layout.dart';
 
 /// Barra superior no mesmo padrão da Home: [AppLayout.screenEdgeInsets] no topo,
-/// linha com ícone à esquerda, título central (20 / w400) e elemento à direita (48×48).
+/// linha com ícone à esquerda, título central (16 / w400) e elemento à direita (44×44).
 class StandardTopBarRow extends StatelessWidget {
   const StandardTopBarRow({
     super.key,
@@ -19,7 +19,7 @@ class StandardTopBarRow extends StatelessWidget {
 
   static TextStyle centerTitleStyle(BuildContext context) {
     return Theme.of(context).textTheme.titleMedium!.copyWith(
-          fontSize: 20,
+          fontSize: 16,
           fontWeight: FontWeight.w400,
         );
   }

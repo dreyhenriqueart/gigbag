@@ -32,7 +32,6 @@ class _EventEditorScreenState extends State<EventEditorScreen> {
   bool _saving = false;
 
   static const double _fieldGap = 10;
-  static const double _saveButtonHeight = 56;
   static const double _saveBottomGap = 32;
   static const double _scrollBottomAboveSave = 16;
 
@@ -185,7 +184,7 @@ class _EventEditorScreenState extends State<EventEditorScreen> {
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
-              trailing: const SizedBox(width: 48, height: 48),
+              trailing: const SizedBox(width: 44, height: 44),
             ),
             const SizedBox(height: AppLayout.screenGap),
             Expanded(
@@ -227,7 +226,7 @@ class _EventEditorScreenState extends State<EventEditorScreen> {
                       Text(
                         'Equipamento',
                         style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                              fontSize: 20,
+                              fontSize: 16,
                               fontWeight: FontWeight.w400,
                               color: AppColors.textSecondary,
                             ),
@@ -288,7 +287,7 @@ class _EventEditorScreenState extends State<EventEditorScreen> {
               ),
               child: SizedBox(
                 width: double.infinity,
-                height: _saveButtonHeight,
+                height: AppLayout.primaryCtaButtonHeight,
                 child: FilledButton(
                   onPressed: (_saving || _title.text.trim().isEmpty) ? null : _save,
                   style: FilledButton.styleFrom(
@@ -312,7 +311,7 @@ class _EventEditorScreenState extends State<EventEditorScreen> {
                       : const Text(
                           'salvar',
                           style: TextStyle(
-                            fontSize: 20,
+                            fontSize: 16,
                             fontWeight: FontWeight.w400,
                             color: AppColors.textPrimary,
                           ),

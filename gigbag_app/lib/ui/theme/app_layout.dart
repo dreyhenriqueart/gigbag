@@ -12,7 +12,10 @@ class AppLayout {
   static const double bagsMonthCardsGap = 24;
 
   // Mantém a mesma “coluna” visual das referências
-  static const double screenHorizontal = 22;
+  static const double screenHorizontal = 16;
+
+  /// Botões primários à largura total: **Salvar**, **Briefing** (e equivalentes).
+  static const double primaryCtaButtonHeight = 56;
 
   static EdgeInsets screenEdgeInsets({double bottom = 0}) {
     return EdgeInsets.fromLTRB(screenHorizontal, screenGap, screenHorizontal, bottom);

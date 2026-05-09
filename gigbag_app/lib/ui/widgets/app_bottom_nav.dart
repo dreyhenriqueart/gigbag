@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../theme/app_colors.dart';
+import '../theme/app_layout.dart';
 import '../screen_map.dart';
 
 class AppBottomNav extends StatelessWidget {
@@ -19,7 +20,7 @@ class AppBottomNav extends StatelessWidget {
       top: false,
       child: Container(
         height: 74,
-        padding: const EdgeInsets.symmetric(horizontal: 44),
+        padding: const EdgeInsets.symmetric(horizontal: AppLayout.screenHorizontal),
         decoration: const BoxDecoration(color: AppColors.bg),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

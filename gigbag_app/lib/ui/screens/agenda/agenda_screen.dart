@@ -61,9 +61,9 @@ class _AgendaScreenState extends State<AgendaScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const StandardTopBarRow(
-                leading: SizedBox(width: 48, height: 48),
+                leading: SizedBox(width: 44, height: 44),
                 centerTitle: Text('Agenda'),
-                trailing: SizedBox(width: 48, height: 48),
+                trailing: SizedBox(width: 44, height: 44),
               ),
               const SizedBox(height: AppLayout.screenGap),
               Padding(
@@ -170,7 +170,7 @@ class _AgendaScreenState extends State<AgendaScreen> {
                     Text(
                       'Bags do dia',
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            fontSize: 20,
+                            fontSize: 16,
                             fontWeight: FontWeight.w400,
                             color: AppColors.textSecondary,
                           ),

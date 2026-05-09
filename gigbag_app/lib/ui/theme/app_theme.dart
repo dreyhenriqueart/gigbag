@@ -13,7 +13,7 @@ ThemeData buildAppTheme() {
 
   // Padrão tipográfico do app:
   // - Poppins em tudo
-  // - Tamanhos: 14 / 20 / 24
+  // - Tamanhos: 14 / 16 / 20
   // - Pesos: Normal (w400) e SemiBold (w600) somente onde explicitado
   final textTheme = GoogleFonts.poppinsTextTheme(base.textTheme).copyWith(
     bodySmall: GoogleFonts.poppins(
@@ -23,19 +23,19 @@ ThemeData buildAppTheme() {
       height: 1.25,
     ),
     bodyMedium: GoogleFonts.poppins(
-      fontSize: 14,
+      fontSize: 16,
       fontWeight: FontWeight.w400,
       color: AppColors.textPrimary,
       height: 1.25,
     ),
     titleMedium: GoogleFonts.poppins(
-      fontSize: 20,
+      fontSize: 16,
       fontWeight: FontWeight.w400,
       color: AppColors.textPrimary,
       height: 1.2,
     ),
     titleLarge: GoogleFonts.poppins(
-      fontSize: 24,
+      fontSize: 16,
       fontWeight: FontWeight.w400,
       color: AppColors.textPrimary,
       height: 1.15,
@@ -92,7 +92,7 @@ ThemeData buildAppTheme() {
         final selected = states.contains(WidgetState.selected);
         return TextStyle(
           color: selected ? AppColors.accentTeal : AppColors.textSecondary,
-          fontSize: 12,
+          fontSize: 14,
           fontWeight: FontWeight.w600,
         );
       }),

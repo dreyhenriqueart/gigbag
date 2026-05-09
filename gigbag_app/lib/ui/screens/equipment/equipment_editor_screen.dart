@@ -28,8 +28,6 @@ class _EquipmentEditorScreenState extends State<EquipmentEditorScreen> {
   /// Igual ao espaçamento entre cards na lista de Equipamento (`ListView.separated`).
   static const double _fieldGap = 10;
 
-  static const double _saveButtonHeight = 56;
-
   /// Espaço entre o botão Salvar e o canto inferior (acima do inset seguro).
   static const double _saveBottomGap = 32;
 
@@ -131,7 +129,7 @@ class _EquipmentEditorScreenState extends State<EquipmentEditorScreen> {
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
-              trailing: const SizedBox(width: 48, height: 48),
+              trailing: const SizedBox(width: 44, height: 44),
             ),
             const SizedBox(height: AppLayout.screenGap),
             Expanded(
@@ -170,7 +168,7 @@ class _EquipmentEditorScreenState extends State<EquipmentEditorScreen> {
                       Text(
                         'Notas',
                         style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                              fontSize: 20,
+                              fontSize: 16,
                               fontWeight: FontWeight.w400,
                               color: AppColors.textSecondary,
                             ),
@@ -201,7 +199,7 @@ class _EquipmentEditorScreenState extends State<EquipmentEditorScreen> {
               ),
               child: SizedBox(
                 width: double.infinity,
-                height: _saveButtonHeight,
+                height: AppLayout.primaryCtaButtonHeight,
                 child: FilledButton(
                   onPressed: _saving ? null : _save,
                   style: FilledButton.styleFrom(
@@ -225,7 +223,7 @@ class _EquipmentEditorScreenState extends State<EquipmentEditorScreen> {
                       : const Text(
                           'salvar',
                           style: TextStyle(
-                            fontSize: 20,
+                            fontSize: 16,
                             fontWeight: FontWeight.w400,
                             color: AppColors.textPrimary,
                           ),
