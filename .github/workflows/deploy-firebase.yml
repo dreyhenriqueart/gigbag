@@ -6,15 +6,23 @@ on:
       - main
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
       - uses: subosito/flutter-action@v2
         with:
           channel: stable
+          flutter-version: '3.29.3'
 
       - name: Flutter build web
         working-directory: gigbag_app
@@ -22,10 +30,13 @@ jobs:
           flutter pub get
           flutter build web --release --base-href="/"
 
-      - name: Deploy to Firebase Hosting (live)
-        uses: FirebaseExtended/action-hosting-deploy@v0
+      - name: Authenticate (service account JSON)
+        uses: google-github-actions/auth@v2
         with:
-          repoToken: ${{ secrets.GITHUB_TOKEN }}
-          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_GIGBAG_APP }}
-          projectId: gigbag-app
-          channelId: live
+          credentials_json: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_GIGBAG_APP }}
+
+      - name: Install Firebase CLI
+        run: npm install -g firebase-tools
+
+      - name: Deploy Hosting
+        run: firebase deploy --only hosting --project gigbag-app --non-interactive
