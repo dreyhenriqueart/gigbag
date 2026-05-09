@@ -3,6 +3,7 @@ name: Deploy Gigbag Web
 on:
   push:
     branches:
+      - developer
       - main
   workflow_dispatch:
 
@@ -33,9 +34,12 @@ jobs:
       - name: Build web
         run: flutter build web --release --base-href="/gigbag/"
 
-      - name: Publish to gh-pages branch
+      - name: Publish site to docs/ on branch developer
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: developer
           publish_dir: gigbag_app/build/web
-          force_orphan: true
+          destination_dir: docs
+          keep_files: true
+          commit_message: 'deploy: GitHub Pages → docs/ [skip ci]'
