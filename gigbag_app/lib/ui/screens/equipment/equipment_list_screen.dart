@@ -6,6 +6,7 @@ import '../../../state/gigbag_store.dart';
 import '../../theme/app_colors.dart';
 import '../../theme/app_layout.dart';
 import '../../widgets/confirm_dialog.dart';
+import '../../widgets/fixed_height_card.dart';
 import '../../widgets/pill_icon_button.dart';
 import '../../widgets/standard_top_bar.dart';
 import '../../widgets/empty_state.dart';
@@ -34,7 +35,7 @@ class EquipmentListScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             StandardTopBarRow(
-              leading: const SizedBox(width: 48, height: 48),
+              leading: const SizedBox(width: 44, height: 44),
               centerTitle: const Text('Equipamentos'),
               trailing: PillIconButton(
                 icon: Icons.add,
@@ -114,27 +115,57 @@ class _EquipmentTile extends StatelessWidget {
       if ((equipment.notes ?? '').trim().isNotEmpty) equipment.notes!.trim(),
     ].join(' • ');
 
-    return Material(
-      color: theme.colorScheme.surfaceContainerHighest,
-      borderRadius: BorderRadius.circular(12),
-      child: ListTile(
-        title: Text(equipment.name),
-        subtitle: subtitle.isEmpty ? null : Text(subtitle),
-        leading: const Icon(Icons.cases),
-        trailing: Wrap(
-          spacing: 8,
-          children: [
-            IconButton(
-              tooltip: 'Editar',
-              onPressed: onEdit,
-              icon: const Icon(Icons.edit_outlined),
-            ),
-            IconButton(
-              tooltip: 'Excluir',
-              onPressed: () => onDelete(),
-              icon: Icon(Icons.delete_outline, color: theme.colorScheme.error),
-            ),
-          ],
+    return FixedHeightCard(
+      child: InkWell(
+        onTap: onEdit,
+        borderRadius: BorderRadius.circular(22),
+        child: Padding(
+          padding: const EdgeInsets.only(left: 12, right: 4),
+          child: Row(
+            children: [
+              CircleAvatar(
+                radius: 20,
+                backgroundColor: AppColors.secondaryBase,
+                child: Icon(Icons.cases_rounded, color: AppColors.bg, size: 22),
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      equipment.name,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: theme.textTheme.titleMedium,
+                    ),
+                    if (subtitle.isNotEmpty)
+                      Text(
+                        subtitle,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: theme.textTheme.bodySmall,
+                      ),
+                  ],
+                ),
+              ),
+              IconButton(
+                tooltip: 'Editar',
+                padding: EdgeInsets.zero,
+                constraints: const BoxConstraints(minWidth: 40, minHeight: 40),
+                onPressed: onEdit,
+                icon: const Icon(Icons.edit_outlined, size: 22),
+              ),
+              IconButton(
+                tooltip: 'Excluir',
+                padding: EdgeInsets.zero,
+                constraints: const BoxConstraints(minWidth: 40, minHeight: 40),
+                onPressed: () => onDelete(),
+                icon: Icon(Icons.delete_outline, color: theme.colorScheme.error, size: 22),
+              ),
+            ],
+          ),
         ),
       ),
     );

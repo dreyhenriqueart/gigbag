@@ -21,8 +21,8 @@ class PillIconButton extends StatelessWidget {
       onTap: onPressed,
       borderRadius: BorderRadius.circular(999),
       child: Container(
-        width: 48,
-        height: 48,
+        width: 44,
+        height: 44,
         decoration: BoxDecoration(
           color: AppColors.surface2,
           borderRadius: BorderRadius.circular(999),
@@ -31,7 +31,7 @@ class PillIconButton extends StatelessWidget {
         child: Icon(
           icon,
           color: iconColor ?? AppColors.textSecondary,
-          size: 22,
+          size: 18,
         ),
       ),
     );

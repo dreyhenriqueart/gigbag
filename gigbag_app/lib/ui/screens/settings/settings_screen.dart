@@ -20,9 +20,9 @@ class SettingsScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             const StandardTopBarRow(
-              leading: SizedBox(width: 48, height: 48),
+              leading: SizedBox(width: 44, height: 44),
               centerTitle: Text('Ajustes'),
-              trailing: SizedBox(width: 48, height: 48),
+              trailing: SizedBox(width: 44, height: 44),
             ),
             const SizedBox(height: AppLayout.screenGap),
             Expanded(
@@ -35,51 +35,51 @@ class SettingsScreen extends StatelessWidget {
                 ),
                 children: [
                   FixedHeightCard(
-                    child: ListTile(
-                      leading: const Icon(Icons.info_outline, color: AppColors.textSecondary),
-                      title: const Text(
-                        'Sobre',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w400,
-                          color: AppColors.textPrimary,
-                        ),
-                      ),
-                      subtitle: const Text(
-                        'Gigbag — checklist de equipamentos por evento',
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                          color: AppColors.textSecondary,
-                        ),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 12),
+                      child: Row(
+                        children: [
+                          CircleAvatar(
+                            radius: 20,
+                            backgroundColor: AppColors.secondaryBase,
+                            child: Icon(Icons.info_outline, color: AppColors.bg, size: 22),
+                          ),
+                          const SizedBox(width: 10),
+                          const Expanded(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Sobre',
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400,
+                                    color: AppColors.textPrimary,
+                                  ),
+                                ),
+                                Text(
+                                  'Gigbag — checklist de equipamentos por evento',
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                    color: AppColors.textSecondary,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
                   const SizedBox(height: 10),
                   FixedHeightCard(
-                    child: ListTile(
-                      leading:
-                          const Icon(Icons.delete_forever_outlined, color: AppColors.textSecondary),
-                      title: const Text(
-                        'Apagar todos os dados',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w400,
-                          color: AppColors.textPrimary,
-                        ),
-                      ),
-                      subtitle: const Text(
-                        'Remove inventário, eventos e briefings deste navegador.',
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                          color: AppColors.textSecondary,
-                        ),
-                      ),
+                    child: InkWell(
                       onTap: () async {
                         final ok = await showConfirmDialog(
                           context,
@@ -98,6 +98,49 @@ class SettingsScreen extends StatelessWidget {
                           );
                         }
                       },
+                      borderRadius: BorderRadius.circular(22),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
+                        child: Row(
+                          children: [
+                            CircleAvatar(
+                              radius: 20,
+                              backgroundColor: AppColors.secondaryBase,
+                              child:
+                                  Icon(Icons.delete_forever_outlined, color: AppColors.bg, size: 22),
+                            ),
+                            const SizedBox(width: 10),
+                            const Expanded(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Apagar todos os dados',
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w400,
+                                      color: AppColors.textPrimary,
+                                    ),
+                                  ),
+                                  Text(
+                                    'Remove inventário, eventos e briefings deste navegador.',
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w400,
+                                      color: AppColors.textSecondary,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                   ),
                 ],

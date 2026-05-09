@@ -66,15 +66,15 @@ class HomeScreen extends StatelessWidget {
                     'Olá, Usuário',
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
                           fontWeight: FontWeight.w600, // SemiBold
-                          fontSize: 24,
+                          fontSize: 20,
                         ),
                   ),
                   const SizedBox(height: 6),
                   Text(
                     'Organizando sua gig!',
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                           fontWeight: FontWeight.w400,
-                          fontSize: 20,
+                          fontSize: 14,
                         ),
                   ),
                   const SizedBox(height: AppLayout.screenGap),

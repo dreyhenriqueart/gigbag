@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../theme/app_colors.dart';
 
-/// Mesmo ponto dos cards de bag (home/bags). Cor costuma ser [AppColors.textSecondary];
-/// em seleção (ex.: editor de evento) usa [AppColors.accentTeal].
+/// Ponto de status nos cards gig (Home/Bags/Agenda). Sem destaque: [AppColors.secondaryBase];
+/// próximo evento destacado (`isNext`): branco sobre o teal.
 class GigCardStatusDot extends StatelessWidget {
   const GigCardStatusDot({super.key, required this.color});
 
@@ -39,15 +39,16 @@ class GigCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final bg = isNext ? AppColors.accentTeal : AppColors.surface2;
     final fg = isNext ? Colors.white : AppColors.textSecondary;
+    final dotColor = isNext ? Colors.white : AppColors.secondaryBase;
     final theme = Theme.of(context);
 
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(22),
       child: ConstrainedBox(
-        constraints: const BoxConstraints(minHeight: 88, maxHeight: 88),
+        constraints: const BoxConstraints(minHeight: 64, maxHeight: 64),
         child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 16),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
           decoration: BoxDecoration(
             color: bg,
             borderRadius: BorderRadius.circular(22),
@@ -66,7 +67,7 @@ class GigCard extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       style: theme.textTheme.titleMedium?.copyWith(color: fg),
                     ),
-                    const SizedBox(height: 6),
+                    const SizedBox(height: 4),
                     Row(
                       children: [
                         Expanded(
@@ -86,7 +87,7 @@ class GigCard extends StatelessWidget {
                           ),
                           const SizedBox(width: 10),
                         ],
-                        GigCardStatusDot(color: fg),
+                        GigCardStatusDot(color: dotColor),
                       ],
                     ),
                   ],

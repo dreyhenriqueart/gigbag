@@ -8,6 +8,7 @@ import '../../theme/app_colors.dart';
 import '../../theme/app_layout.dart';
 import '../../widgets/confirm_dialog.dart';
 import '../../widgets/pill_icon_button.dart';
+import '../../widgets/fixed_height_card.dart';
 import '../../widgets/standard_top_bar.dart';
 import '../../widgets/empty_state.dart';
 import 'event_detail_screen.dart';
@@ -36,7 +37,7 @@ class EventsListScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             StandardTopBarRow(
-              leading: const SizedBox(width: 48, height: 48),
+              leading: const SizedBox(width: 44, height: 44),
               centerTitle: const Text('Eventos'),
               trailing: PillIconButton(
                 icon: Icons.add,
@@ -128,28 +129,56 @@ class _EventTile extends StatelessWidget {
       '$equipmentCount item(ns)',
     ].join(' • ');
 
-    return Material(
-      color: theme.colorScheme.surfaceContainerHighest,
-      borderRadius: BorderRadius.circular(12),
-      child: ListTile(
+    return FixedHeightCard(
+      child: InkWell(
         onTap: onOpen,
-        title: Text(event.title),
-        subtitle: Text(subtitle),
-        leading: const Icon(Icons.event),
-        trailing: Wrap(
-          spacing: 8,
-          children: [
-            IconButton(
-              tooltip: 'Editar',
-              onPressed: onEdit,
-              icon: const Icon(Icons.edit_outlined),
-            ),
-            IconButton(
-              tooltip: 'Excluir',
-              onPressed: () => onDelete(),
-              icon: Icon(Icons.delete_outline, color: theme.colorScheme.error),
-            ),
-          ],
+        borderRadius: BorderRadius.circular(22),
+        child: Padding(
+          padding: const EdgeInsets.only(left: 12, right: 4),
+          child: Row(
+            children: [
+              CircleAvatar(
+                radius: 20,
+                backgroundColor: AppColors.secondaryBase,
+                child: Icon(Icons.event_rounded, color: AppColors.bg, size: 22),
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      event.title,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: theme.textTheme.titleMedium,
+                    ),
+                    Text(
+                      subtitle,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: theme.textTheme.bodySmall,
+                    ),
+                  ],
+                ),
+              ),
+              IconButton(
+                tooltip: 'Editar',
+                padding: EdgeInsets.zero,
+                constraints: const BoxConstraints(minWidth: 40, minHeight: 40),
+                onPressed: onEdit,
+                icon: const Icon(Icons.edit_outlined, size: 22),
+              ),
+              IconButton(
+                tooltip: 'Excluir',
+                padding: EdgeInsets.zero,
+                constraints: const BoxConstraints(minWidth: 40, minHeight: 40),
+                onPressed: () => onDelete(),
+                icon: Icon(Icons.delete_outline, color: theme.colorScheme.error, size: 22),
+              ),
+            ],
+          ),
         ),
       ),
     );

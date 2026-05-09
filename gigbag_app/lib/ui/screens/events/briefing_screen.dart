@@ -33,7 +33,7 @@ class BriefingScreen extends StatelessWidget {
                   onPressed: () => Navigator.of(context).pop(),
                 ),
                 centerTitle: const Text('Briefing'),
-                trailing: const SizedBox(width: 48, height: 48),
+                trailing: const SizedBox(width: 44, height: 44),
               ),
               const Expanded(child: Center(child: Text('Evento não encontrado.'))),
             ],
@@ -92,7 +92,7 @@ class BriefingScreen extends StatelessWidget {
                       onPressed: () => Navigator.of(context).pop(),
                     ),
                     centerTitle: headerTitle,
-                    trailing: const SizedBox(width: 48, height: 48),
+                    trailing: const SizedBox(width: 44, height: 44),
                   ),
                   const Expanded(
                     child: Center(
@@ -141,10 +141,10 @@ class BriefingScreen extends StatelessWidget {
                                 ),
                             borderRadius: BorderRadius.circular(22),
                             child: ConstrainedBox(
-                              constraints: const BoxConstraints(minHeight: 88, maxHeight: 88),
+                              constraints: const BoxConstraints(minHeight: 64, maxHeight: 64),
                               child: Container(
                                 padding:
-                                    const EdgeInsets.symmetric(horizontal: 18, vertical: 16),
+                                    const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                                 decoration: BoxDecoration(
                                   color: AppColors.secondaryBase.withValues(alpha: 0.10),
                                   borderRadius: BorderRadius.circular(22),
@@ -160,7 +160,7 @@ class BriefingScreen extends StatelessWidget {
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,
                                         style: const TextStyle(
-                                          fontSize: 20,
+                                          fontSize: 16,
                                           fontWeight: FontWeight.w400,
                                           color: AppColors.textPrimary,
                                         ),
@@ -181,7 +181,7 @@ class BriefingScreen extends StatelessWidget {
                                     ],
                                     const SizedBox(width: 10),
                                     GigCardStatusDot(
-                                      color: value ? AppColors.accentTeal : AppColors.textSecondary,
+                                      color: value ? AppColors.accentTeal : AppColors.secondaryBase,
                                     ),
                                   ],
                                 ),
@@ -205,7 +205,7 @@ class BriefingScreen extends StatelessWidget {
                         child: Text(
                           'Itens faltantes',
                           style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                fontSize: 20,
+                                fontSize: 16,
                                 fontWeight: FontWeight.w400,
                                 color: AppColors.textSecondary,
                               ),

@@ -2,6 +2,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../domain/equipment.dart';
 import '../../../domain/gig_event.dart';
 import '../../../state/gigbag_store.dart';
 import '../../formatters.dart';
@@ -38,12 +39,47 @@ class _EventDetailScreenState extends State<EventDetailScreen> {
   bool _saving = false;
 
   static const double _fieldGap = 10;
-  static const double _saveButtonHeight = 56;
   static const double _saveBottomGap = 32;
   static const double _scrollBottomAboveButtons = 16;
   static const double _betweenBriefingAndSave = 16;
 
   static const Locale _pickerLocale = Locale('pt', 'BR');
+
+  List<String> _sortedCategoryKeys(Iterable<Equipment> equipments) {
+    final keys = <String>{};
+    for (final e in equipments) {
+      final k = (e.category ?? '').trim();
+      if (k.isNotEmpty) keys.add(k);
+    }
+    final list = keys.toList();
+    list.sort((a, b) => a.toLowerCase().compareTo(b.toLowerCase()));
+    return list;
+  }
+
+  List<({String label, List<Equipment> items})> _groupByCategory(List<Equipment> equipmentsSortedByName) {
+    final byCat = <String, List<Equipment>>{};
+    final uncategorized = <Equipment>[];
+
+    for (final e in equipmentsSortedByName) {
+      final cat = (e.category ?? '').trim();
+      if (cat.isEmpty) {
+        uncategorized.add(e);
+      } else {
+        (byCat[cat] ??= []).add(e);
+      }
+    }
+
+    final sections = <({String label, List<Equipment> items})>[];
+    for (final cat in _sortedCategoryKeys(equipmentsSortedByName)) {
+      final items = byCat[cat];
+      if (items == null || items.isEmpty) continue;
+      sections.add((label: cat, items: items));
+    }
+    if (uncategorized.isNotEmpty) {
+      sections.add((label: 'Sem categoria', items: uncategorized));
+    }
+    return sections;
+  }
 
   TextStyle _boxedFieldTextStyle(BuildContext context) {
     return Theme.of(context).textTheme.bodyMedium!;
@@ -146,7 +182,7 @@ class _EventDetailScreenState extends State<EventDetailScreen> {
   }) {
     return SizedBox(
       width: double.infinity,
-      height: _saveButtonHeight,
+      height: AppLayout.primaryCtaButtonHeight,
       child: FilledButton(
         onPressed: onPressed,
         style: FilledButton.styleFrom(
@@ -188,7 +224,7 @@ class _EventDetailScreenState extends State<EventDetailScreen> {
                   onPressed: () => Navigator.of(context).pop(),
                 ),
                 centerTitle: const Text('Bag'),
-                trailing: const SizedBox(width: 48, height: 48),
+                trailing: const SizedBox(width: 44, height: 44),
               ),
               const Expanded(child: Center(child: Text('Evento não encontrado.'))),
             ],
@@ -200,6 +236,7 @@ class _EventDetailScreenState extends State<EventDetailScreen> {
     _initFromEvent(event);
 
     final equipmentsSorted = [...store.equipments]..sort((a, b) => a.name.compareTo(b.name));
+    final equipmentSections = _groupByCategory(equipmentsSorted);
     final briefingEnabled = _selectedEquipmentIds!.isNotEmpty;
 
     return Scaffold(
@@ -218,7 +255,7 @@ class _EventDetailScreenState extends State<EventDetailScreen> {
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
-              trailing: const SizedBox(width: 48, height: 48),
+              trailing: const SizedBox(width: 44, height: 44),
             ),
             const SizedBox(height: AppLayout.screenGap),
             Expanded(
@@ -260,7 +297,7 @@ class _EventDetailScreenState extends State<EventDetailScreen> {
                       Text(
                         'Equipamento',
                         style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                              fontSize: 20,
+                              fontSize: 16,
                               fontWeight: FontWeight.w400,
                               color: AppColors.textSecondary,
                             ),
@@ -274,26 +311,38 @@ class _EventDetailScreenState extends State<EventDetailScreen> {
                               ),
                         )
                       else
-                        for (var i = 0; i < equipmentsSorted.length; i++) ...[
-                          if (i > 0) const SizedBox(height: _fieldGap),
-                          EquipmentListCard(
-                            equipment: equipmentsSorted[i],
-                            onTap: () {
-                              final id = equipmentsSorted[i].id;
-                              setState(() {
-                                if (_selectedEquipmentIds!.contains(id)) {
-                                  _selectedEquipmentIds!.remove(id);
-                                } else {
-                                  _selectedEquipmentIds!.add(id);
-                                }
-                              });
-                            },
-                            trailing: GigCardStatusDot(
-                              color: _selectedEquipmentIds!.contains(equipmentsSorted[i].id)
-                                  ? AppColors.accentTeal
-                                  : AppColors.textSecondary,
-                            ),
+                        for (var si = 0; si < equipmentSections.length; si++) ...[
+                          if (si > 0) const SizedBox(height: 16),
+                          Text(
+                            equipmentSections[si].label,
+                            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                  color: AppColors.textSecondary,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
+                                ),
                           ),
+                          const SizedBox(height: 10),
+                          for (var i = 0; i < equipmentSections[si].items.length; i++) ...[
+                            if (i > 0) const SizedBox(height: _fieldGap),
+                            EquipmentListCard(
+                              equipment: equipmentSections[si].items[i],
+                              onTap: () {
+                                final id = equipmentSections[si].items[i].id;
+                                setState(() {
+                                  if (_selectedEquipmentIds!.contains(id)) {
+                                    _selectedEquipmentIds!.remove(id);
+                                  } else {
+                                    _selectedEquipmentIds!.add(id);
+                                  }
+                                });
+                              },
+                              trailing: GigCardStatusDot(
+                                color: _selectedEquipmentIds!.contains(equipmentSections[si].items[i].id)
+                                    ? AppColors.accentTeal
+                                    : AppColors.textSecondary,
+                              ),
+                            ),
+                          ],
                         ],
                     ],
                   ),
@@ -316,7 +365,7 @@ class _EventDetailScreenState extends State<EventDetailScreen> {
                     child: const Text(
                       'briefing',
                       style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 16,
                         fontWeight: FontWeight.w400,
                         color: AppColors.textPrimary,
                       ),
@@ -340,7 +389,7 @@ class _EventDetailScreenState extends State<EventDetailScreen> {
                           : const Text(
                               'salvar',
                               style: TextStyle(
-                                fontSize: 20,
+                                fontSize: 16,
                                 fontWeight: FontWeight.w400,
                                 color: AppColors.textPrimary,
                               ),

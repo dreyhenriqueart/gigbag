@@ -116,7 +116,7 @@ class _BagsScreenState extends State<BagsScreen> {
                         Text(
                           sections[gi].label,
                           style: const TextStyle(
-                            fontSize: 20,
+                            fontSize: 16,
                             fontWeight: FontWeight.w400,
                             color: AppColors.textSecondary,
                           ),
