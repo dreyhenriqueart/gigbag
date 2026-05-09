@@ -1,9 +1,6 @@
-name: Deploy Gigbag Web
+name: Deploy Gigbag Web (GitHub Pages)
 
 on:
-  push:
-    branches:
-      - developer
   workflow_dispatch:
 
 permissions:
@@ -25,7 +22,7 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           channel: stable
-          flutter-version: '3.29.3'
+          flutter-version: "3.29.3"
 
       - name: Flutter pub get
         run: flutter pub get
@@ -41,4 +38,4 @@ jobs:
           publish_dir: gigbag_app/build/web
           destination_dir: docs
           keep_files: true
-          commit_message: 'deploy: GitHub Pages → docs/ [skip ci]'
+          commit_message: "deploy: GitHub Pages → docs/ [skip ci]"
